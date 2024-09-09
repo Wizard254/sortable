@@ -4,8 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sortable | Homepage</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Poppins:400,500,300,700);
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: rgb(248, 249, 253);
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            color: #333;
+            /*color: rgb(128, 128, 128);*/
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <script src="js/search.js" type="module"></script>
 </head>
 <body>
+
+<!-- region searchbar-->
+<div id="search-bar">
+    <div class="search-container">
+        <span class="material-icons arrow-down" id="advanced-toggle">arrow_drop_down</span>
+        <span class="material-icons search-icon">search</span>
+        <input id="search-input" type="text" class="search-input" placeholder="Search a superhero..." autofocus>
+        <select id="field" class="category-select">
+            <option value="name">Superhero Trait</option>
+            <option value="name">Name</option>
+            <option value="biography.fullName">Full Name</option>
+            <option value="appearance.race">Race</option>
+            <option value="appearance.gender">Gender</option>
+            <option value="powerstats.combat">Combat</option>
+            <option value="powerstats.durability">Durability</option>
+            <option value="powerstats.intelligence">Intelligence</option>
+            <option value="powerstats.power">Power</option>
+            <option value="powerstats.speed">Speed</option>
+            <option value="powerstats.strength">Strength</option>
+            <option value="appearance.height">Height</option>
+            <option value="appearance.weight">Weight</option>
+            <option value="biography.placeOfBirth">Place Of Birth</option>
+            <option value="biography.alignment">Alignment</option>
+        </select>
+    </div>
+
+    <div class="advanced-options" id="advanced-options">
+        <h6>Search Operator</h6>
+        <hr style="background-color: lightgrey"/>
+
+        <label><input type="radio" id="include" name="search_operator" value="include" checked>Include</label>
+        <label> <input type="radio" id="exclude" name="search_operator" value="exclude">Exclude</label>
+<!--        <label><input type="radio" id="fuzzy" name="search_operator" value="fuzzy">Fuzzy</label>-->
+<!--        <label><input type="radio" id="equal" name="search_operator" value="equal">Equal</label>-->
+<!--        <label><input type="radio" id="not-equal" name="search_operator" value="not equal">Not Equal</label>-->
+<!--        <label><input type="radio" id="greater-than" name="search_operator" value="greater than">Greater Than</label>-->
+<!--        <label><input type="radio" id="lesser-than" name="search_operator" value="lesser than">Lesser Than</label>-->
+    </div>
+</div>
+<!-- endregion searchbar-->
+
+<div style="height: 100px; width: 100%;"></div>
+<select id="pageSize">
+    <option value="10">10 per page</option>
+    <option value="20" selected>20 per page</option>
+    <option value="50">50 per page</option>
+    <option value="100">100 per page</option>
+    <option value="all">All results</option>
+</select>
+
+<!-- region table-->
+<div id="table-container" class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Full Name</th>
+            <th>Combat</th>
+            <th>Durability</th>
+            <th>Intelligence</th>
+            <th>Power</th>
+            <th>Speed</th>
+            <th>Strength</th>
+            <th>Race</th>
+            <th>Gender</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>PlaceOfBirth</th>
+            <th>Alignment</th>
+        </tr>
+        </thead>
+        <tbody id="heroTableBody">
+        <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+<!-- endregion table-->
+
+<div class="pagination">
+    <button id="prevPage">Previous</button>
+    <span id="pageNumber">-1</span>
+    <button id="nextPage">Next</button>
+</div>
 
 </body>
 </html>

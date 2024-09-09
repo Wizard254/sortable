@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Design Search Field</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            width: 600px;
+            transition: all 0.3s ease;
+        }
+
+        .search-container:focus-within {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrow-down {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .arrow-down:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        .category-select:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        .search-icon {
+            color: #757575;
+            margin: 0 8px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 8px;
+        }
+
+        .category-select {
+            border: none;
+            background-color: transparent;
+            padding: 10px 5px 10px 10px;
+            font-size: 16px;
+            color: #757575;
+            outline: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-right: 5px;
+        }
+
+        .advanced-options {
+            display: none;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin-top: 8px;
+            width: fit-content;
+        }
+
+        .advanced-options label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .advanced-options input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        #search-bar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="search-bar">
+    <div class="search-container">
+        <span class="material-icons arrow-down" id="advanced-toggle">arrow_drop_down</span>
+        <span class="material-icons search-icon">search</span>
+        <input id="search-input" type="text" class="search-input" placeholder="Search a superhero..." autofocus>
+        <select id="field" class="category-select">
+            <option value="">Superhero Trait</option>
+            <option value="books">Books</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="home">Home &amp; Garden</option>
+        </select>
+    </div>
+
+    <div class="advanced-options" id="advanced-options">
+        <h6>Search Operator</h6>
+        <hr style="background-color: lightgrey"/>
+
+        <label><input type="radio" id="include" name="search_operator" value="include"> Include</label>
+        <label> <input type="radio" id="exclude" name="search_operator" value="exclude">Exclude</label>
+        <label><input type="radio" id="fuzzy" name="search_operator" value="fuzzy">Fuzzy</label>
+        <label><input type="radio" id="equal" name="search_operator" value="equal">Equal</label>
+        <label><input type="radio" id="not-equal" name="search_operator" value="not equal">Not Equal</label>
+        <label><input type="radio" id="greater-than" name="search_operator" value="greater than">Greater Than</label>
+        <label><input type="radio" id="lesser-than" name="search_operator" value="lesser than">Lesser Than</label>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const advancedToggle = document.getElementById('advanced-toggle');
+        const advancedOptions = document.getElementById('advanced-options');
+
+        advancedToggle.addEventListener('click', function () {
+            if (advancedOptions.style.display === 'none' || advancedOptions.style.display === '') {
+                advancedOptions.style.display = 'block';
+                advancedToggle.textContent = 'arrow_drop_up';
+            } else {
+                advancedOptions.style.display = 'none';
+                advancedToggle.textContent = 'arrow_drop_down';
+            }
+        });
+    });
+
+    const inputElement = document.getElementById('search-input');
+    inputElement.addEventListener('input', (event) => {
+        const newValue = event.target.value;
+        console.log("New value:", newValue);
+
+        // search for newValue
+    });
+
+    const searchOperatorRadios = document.querySelectorAll('input[name="search_operator"]');
+    let searchOperator = 'include';
+
+    searchOperatorRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            searchOperator = radio.value;
+            console.log(`Search Operator: ${searchOperator}`); // Show the updated value
+        });
+    });
+</script>
+</body>
+</html>
